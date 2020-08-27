@@ -14,10 +14,10 @@ Run with: npm start
 I have this running on a Raspberry Pi as a cron job. To get this to run on a Pi, you will likely need to add the following options to the puppeteer launch call:
 
 ```javascript
-.launch({
-  defaultViewport: {height: 1080, width: 1920}, 
-  headless: false, 
-  args: ['--display=:1', '--no-sandbox', '--disable-extensions'], 
+.launch({ 
+  headless: true, 
+  args: ['--no-sandbox', '--disable-extensions'], 
   executablePath: '/usr/bin/chromium-browser'
 })
 ```
+
