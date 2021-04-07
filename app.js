@@ -3,9 +3,9 @@ const chalk = require('chalk');
 const $ = require('cheerio');
 const mailer = require('./mailer');
 
-const path = 'nintendo-switch-neon-blue-neon-red-joy-con-refurbished.html';
-const domain = 'https://store.nintendo.com/';
-const url = domain + path;
+const url = process.argv[2];
+const elementSelector = process.argv[3];
+const outOfStockValue = process.argv[4];
 
 puppeteer
   .launch()
@@ -18,7 +18,7 @@ puppeteer
       });
     })
     .then(function(html) {
-      const matchingElements = $('div.stock > span', html);
+      const matchingElements = $(elementSelector, html);
       if (matchingElements.length == 1){
         const elementProperties = matchingElements[0].children;
         if (elementProperties.length) {
@@ -28,7 +28,7 @@ puppeteer
       throw new Error('Unable to find content.');
     })
     .then(function(data) {
-      if (data != 'Out of stock') {
+      if (data != outOfStockValue) {
         console.log('Item is in stock!');
         mailer.sendInStockAlert(url);
       } else {
