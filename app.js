@@ -38,6 +38,7 @@ puppeteer
     })
     .catch(function(err) {
       console.log(chalk.red(err));
+      mailer.sendErrorEmail(url, err);
     })
     .finally(function(){
       browser.close();
