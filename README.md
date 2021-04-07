@@ -16,7 +16,10 @@ $ node app.js <url> <elementSelector> <noStockValue>
 
 For example, to check whether the switch SNES controller stock has been updated:
 ```
-$ node app.js "https://store.nintendo.ca/super-nintendo-entertainment-system-controller.html" ".product-info-stock-sku > .stock > span" "Out of stock"
+$ node app.js \ 
+  "https://store.nintendo.ca/super-nintendo-entertainment-system-controller.html" \ 
+  ".product-info-stock-sku > .stock > span" \ 
+  "Out of stock"
 ```
 
 This works because the span element contains the value "Out of stock" when there is no stock.
